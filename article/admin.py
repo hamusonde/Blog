@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+ 
 from django.contrib import admin
+from models import Article
 
 # Register your models here.
 
+class articleAdmin(admin.ModelAdmin):
+	list_display = ['author', 'content', 'time', 'date', 'title']
+	search_filters = ['article', 'author', 'title']
 
-class article(models.Model):
-	author = models.Charfield(_("Author"), max_length = 60, null = True, blank =True)
-	title = models.Charfield(_("Title"), max_length = 80, null = True, blank = True)
-	time_stump = models.Datefield(_("published"),auto_now = True)
-	content = models.Textfieds(_("Article"), blank = True, null = True)
+	class meta:
+		model = Article
 
-
-	class Meta:
-		verbose_name = 'ARTICLE'
-		verbose_name_plural = 'ARTICLES'
-		
+admin.site.register(Article,articleAdmin)
